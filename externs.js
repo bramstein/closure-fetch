@@ -5,7 +5,7 @@ var HeadersInit;
 
 /**
  * @constructor
- * @param {HeadersInit} init
+ * @param {HeadersInit=} init
  */
 var Headers = function (init) {};
 
@@ -63,27 +63,27 @@ var Body = function () {};
 Body.prototype.bodyUsed;
 
 /**
- * @returns {Promise.<ArrayBuffer>}
+ * @returns {Promise.<!ArrayBuffer>}
  */
 Body.prototype.arrayBuffer = function() {};
 
 /**
- * @returns {Promise.<Blob>}
+ * @returns {Promise.<!Blob>}
  */
 Body.prototype.blob = function () {};
 
 /**
- * @returns {Promise.<FormData>}
+ * @returns {Promise.<!FormData>}
  */
 Body.prototype.formData = function () {};
 
 /**
- * @returns {Promise.<Object>}
+ * @returns {Promise.<!Object>}
  */
 Body.prototype.json = function () {};
 
 /**
- * @returns {Promise.<string>}
+ * @returns {Promise.<!string>}
  */
 Body.prototype.text = function () {};
 
@@ -132,7 +132,7 @@ var RequestInit;
  * @constructor
  *
  * @implements {Body}
- * @param {RequestInfo} input
+ * @param {!RequestInfo} input
  * @param {RequestInit=} init
  */
 var Request = function (input, init) {};
@@ -195,27 +195,27 @@ Request.prototype.clone = function () {};
 Request.prototype.bodyUsed;
 
 /**
- * @returns {Promise.<ArrayBuffer>}
+ * @returns {Promise.<!ArrayBuffer>}
  */
 Request.prototype.arrayBuffer = function() {};
 
 /**
- * @returns {Promise.<Blob>}
+ * @returns {Promise.<!Blob>}
  */
 Request.prototype.blob = function () {};
 
 /**
- * @returns {Promise.<FormData>}
+ * @returns {Promise.<!FormData>}
  */
 Request.prototype.formData = function () {};
 
 /**
- * @returns {Promise.<Object>}
+ * @returns {Promise.<!Object>}
  */
 Request.prototype.json = function () {};
 
 /**
- * @returns {Promise.<string>}
+ * @returns {Promise.<!string>}
  */
 Request.prototype.text = function () {};
 
@@ -244,8 +244,8 @@ var ResponseType = {};
  * @constructor
  *
  * @implements {Body}
- * @param {BodyInit} body
- * @param {ResponseInit} init
+ * @param {!BodyInit} body
+ * @param {ResponseInit=} init
  */
 var Response = function (body, init) {};
 
@@ -290,34 +290,34 @@ Response.prototype.clone = function () {};
 Response.prototype.bodyUsed;
 
 /**
- * @returns {Promise.<ArrayBuffer>}
+ * @returns {Promise.<!ArrayBuffer>}
  */
 Response.prototype.arrayBuffer = function() {};
 
 /**
- * @returns {Promise.<Blob>}
+ * @returns {Promise.<!Blob>}
  */
 Response.prototype.blob = function () {};
 
 /**
- * @returns {Promise.<FormData>}
+ * @returns {Promise.<!FormData>}
  */
 Response.prototype.formData = function () {};
 
 /**
- * @returns {Promise.<Object>}
+ * @returns {Promise.<!Object>}
  */
 Response.prototype.json = function () {};
 
 /**
- * @returns {Promise.<string>}
+ * @returns {Promise.<!string>}
  */
 Response.prototype.text = function () {};
 
 /**
- * @param {RequestInfo} input
+ * @param {!RequestInfo} input
  * @param {RequestInit=} init
  *
- * @return {Promise.<Response>}
+ * @return {Promise.<!Response>}
  */
 var fetch = function(input, init) {};
