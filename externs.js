@@ -117,13 +117,13 @@ var RequestRedirect = {};
 
 /**
  * @typedef {{
- *  method: string,
- *  headers: HeadersInit,
- *  body: BodyInit,
- *  mode: RequestMode,
- *  credentials: RequestCredentials,
- *  cache: RequestCache,
- *  redirect: RequestRedirect
+ *  method: (string|undefined),
+ *  headers: (HeadersInit|undefined),
+ *  body: (BodyInit|undefined),
+ *  mode: (RequestMode|undefined),
+ *  credentials: (RequestCredentials|undefined),
+ *  cache: (RequestCache|undefined),
+ *  redirect: (RequestRedirect|undefined)
  * }}
  */
 var RequestInit;
@@ -228,9 +228,9 @@ var RequestInfo;
 
 /**
  * @typedef {{
- *  status: number,
- *  statusText: string,
- *  headers: HeadersInit
+ *  status: (number|undefined),
+ *  statusText: (string|undefined),
+ *  headers: (HeadersInit|undefined)
  * }}
  */
 var ResponseInit;
