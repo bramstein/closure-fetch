@@ -21,11 +21,6 @@ goog.scope(function () {
 
     return new Promise(function (resolve, reject) {
       var request = new XMLHttpRequest();
-
-      // If we didn't need to support IE9 we could use Blob here
-      // and convert it to whatever response type we need.
-      request.responseType = 'arraybuffer';
-
       request.onload = function () {
         resolve(new Response(/** @type {net.BodyInit} */ (request.response), {
           status: request.status,
@@ -37,7 +32,11 @@ goog.scope(function () {
         reject(new TypeError('Network request failed'));
       };
 
-      request.open(init.method, input, true);
+      request.open(init.method, input);
+
+      // If we didn't need to support IE9 we could use Blob here
+      // and convert it to whatever response type we need.
+      request.responseType = 'arraybuffer';
 
       if (init.headers) {
         Object.keys(/** @type {!Object} */ (init.headers)).forEach(function (header) {
