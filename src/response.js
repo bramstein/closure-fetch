@@ -35,7 +35,7 @@ goog.scope(function () {
   /**
    * @return {Promise.<ArrayBuffer>}
    */
-  Response.prototype.arrayBuffer = function () {
+  Response.prototype['arrayBuffer'] = function () {
     return Promise.resolve(/** @type {ArrayBuffer} */ (this.body));
   };
 });

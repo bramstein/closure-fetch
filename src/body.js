@@ -9,5 +9,5 @@ goog.scope(function () {
   /**
    * @return {Promise.<ArrayBuffer>}
    */
-  net.Body.prototype.arrayBuffer = function () {};
+  net.Body.prototype['arrayBuffer'] = function () {};
 });
