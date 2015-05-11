@@ -12,7 +12,7 @@ goog.scope(function () {
    * @param {net.RequestInit=} opt_init
    * @return {Promise.<net.Response>}
    */
-  net.fetch = function (input, opt_init) {
+  net.fetchImpl = function (input, opt_init) {
     var init = opt_init || /** @type {net.RequestInit} */ ({
       method: 'GET',
       headers: {},
@@ -47,4 +47,6 @@ goog.scope(function () {
       request.send(init.body);
     });
   };
+
+  net.fetch = window['fetch'] || net.fetchImpl;
 });

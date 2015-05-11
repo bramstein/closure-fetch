@@ -1,5 +1,5 @@
 describe('net.fetch', function () {
-  var fetch = net.fetch;
+  var fetch = net.fetchImpl;
 
   var base64 = 'R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
 
