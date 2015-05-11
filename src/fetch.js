@@ -3,9 +3,12 @@ goog.provide('net.fetch');
 goog.require('net.Body');
 goog.require('net.Response');
 
+goog.require('lang.Promise');
+
 goog.scope(function () {
   var Body = net.Body,
-      Response = net.Response;
+      Response = net.Response,
+      Promise = lang.Promise;
 
   /**
    * @param {string} input

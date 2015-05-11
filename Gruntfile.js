@@ -23,7 +23,7 @@ module.exports = function (grunt) {
     },
     watch: {},
     exec: {
-      deps: 'calcdeps -i src -p src -p ./vendor/google/base.js -o deps > test/deps.js'
+      deps: 'calcdeps -p src -p ./node_modules/promis/src/ -p ./vendor/google/base.js -o deps > test/deps.js'
     },
     jshint: {
       all: ['src/**/*.js'],
@@ -44,19 +44,19 @@ module.exports = function (grunt) {
     closurecompiler: {
       dist: {
         files: {
-          "fetch.js": ['src/**/*.js', 'polyfill.js']
+          "fetch.js": ['src/**/*.js', 'node_modules/promis/src/**/*.js', 'polyfill.js']
         },
         options: extend({}, compilerOptions)
       },
       compile: {
         files: {
-          "build/fetch.js": ['src/**/*.js', 'polyfill.js'],
+          "build/fetch.js": ['src/**/*.js', 'node_modules/promis/src/**/*.js', 'polyfill.js'],
         },
         options: extend({}, compilerOptions)
       },
       debug: {
         files: {
-          "build/fetch.debug.js": ['src/**/*.js', 'polyfill.js']
+          "build/fetch.debug.js": ['src/**/*.js', 'node_modules/promis/src/**/*.js', 'polyfill.js']
         },
         options: extend({}, compilerOptions, {
           debug: true,
@@ -65,10 +65,6 @@ module.exports = function (grunt) {
       }
     },
     concat: {
-      dist_standalone: {
-        src: ['node_modules/promis/promise.js', 'build/fetch.js'],
-        dest: 'fetch.standalone.js'
-      },
       dist: {
         src: ['build/fetch.js'],
         dest: 'fetch.js'
@@ -89,5 +85,5 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['compile']);
   grunt.registerTask('test', ['connect', 'exec:test']);
   grunt.registerTask('dev', ['connect', 'watch']);
-  grunt.registerTask('dist', ['clean', 'closurecompiler:compile', 'concat:dist', 'concat:dist_standalone']);
+  grunt.registerTask('dist', ['clean', 'closurecompiler:compile', 'concat:dist']);
 };
