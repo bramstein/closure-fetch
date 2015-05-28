@@ -55,6 +55,11 @@ goog.scope(function () {
       } else {
         var request = new XDomainRequest();
 
+        request.open(init.method, input.replace(/^http(s)?:/i, window.location.protocol));
+
+        request.ontimeout = function () { return true; };
+        request.onprogress = function () { return true; };
+
         request.onload = function () {
           resolve(new Response(/** @type {net.BodyInit} */ (request.responseText), {
             status: request.status,
@@ -66,8 +71,9 @@ goog.scope(function () {
           reject(new TypeError('Network request failed'));
         };
 
-        request.open(init.method, input.replace(/^http(s)?:/i, window.location.protocol));
-        request.send(/** @type {string} */ (init.body));
+        setTimeout(function () {
+          request.send(/** @type {string} */ (init.body));
+        }, 0);
       }
     });
   };
