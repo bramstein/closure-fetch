@@ -11,7 +11,7 @@
   "author": "Bram Stein <b.l.stein@gmail.com> (http://www.bramstein.com/)",
   "license": "BSD",
   "dependencies": {
-    "promis": "=1.0.4"
+    "promis": "=1.0.6"
   },
   "devDependencies": {
     "mocha": "=2.2.1",
