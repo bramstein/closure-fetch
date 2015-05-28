@@ -10,7 +10,6 @@ describe('net.fetch', function () {
 
   it('resolves when fetching GET HTTP 200', function (done) {
     fetch('/200').then(function (response) {
-      console.log(response);
       expect(response.ok, 'to be true');
       expect(response.status, 'to equal', 200);
       expect(response.statusText, 'to equal', 'OK');
