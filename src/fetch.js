@@ -23,31 +23,49 @@ goog.scope(function () {
     });
 
     return new Promise(function (resolve, reject) {
-      var request = new XMLHttpRequest();
-      request.onload = function () {
-        resolve(new Response(/** @type {net.BodyInit} */ (request.response), {
-          status: request.status,
-          statusText: request.statusText
-        }));
-      };
+      if (window['XDomainRequest']) {
+        var request = new XDomainRequest();
 
-      request.onerror = function () {
-        reject(new TypeError('Network request failed'));
-      };
+        request.onload = function () {
+          resolve(new Response(/** @type {net.BodyInit} */ (request.responseText), {
+            status: request.status,
+            statusText: request.statusText
+          }));
+        };
 
-      request.open(init.method, input);
+        request.onerror = function () {
+          reject(new TypeError('Network request failed'));
+        };
 
-      // If we didn't need to support IE9 we could use Blob here
-      // and convert it to whatever response type we need.
-      request.responseType = 'arraybuffer';
+        request.open(init.method, input.replace(/^http(s)?:/i, window.location.protocol));
+        request.send(init.body);
+      } else {
+        var request = new XMLHttpRequest();
+        request.onload = function () {
+          resolve(new Response(/** @type {net.BodyInit} */ (request.response), {
+            status: request.status,
+            statusText: request.statusText
+          }));
+        };
 
-      if (init.headers) {
-        Object.keys(/** @type {!Object} */ (init.headers)).forEach(function (header) {
-          request.setRequestHeader(header, init.headers[header]);
-        });
+        request.onerror = function (e) {
+          reject(new TypeError('Network request failed'));
+        };
+
+        request.open(init.method, input);
+
+        // If we didn't need to support IE9 we could use Blob here
+        // and convert it to whatever response type we need.
+        request.responseType = 'arraybuffer';
+
+        if (init.headers) {
+          Object.keys(/** @type {!Object} */ (init.headers)).forEach(function (header) {
+            request.setRequestHeader(header, init.headers[header]);
+          });
+        }
+
+        request.send(init.body);
       }
-
-      request.send(init.body);
     });
   };
 
