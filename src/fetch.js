@@ -23,7 +23,7 @@ goog.scope(function () {
     });
 
     return new Promise(function (resolve, reject) {
-      if (window['XDomainRequest']) {
+      if (!('responseType' in XMLHttpRequest.prototype)) {
         var request = new XDomainRequest();
 
         request.onload = function () {
