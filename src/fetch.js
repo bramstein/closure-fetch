@@ -10,6 +10,8 @@ goog.scope(function () {
       Response = net.Response,
       Promise = lang.Promise;
 
+  var SUPPORTS_RESPONSE_TYPE = !!('responseType' in XMLHttpRequest.prototype);
+
   /**
    * @param {string} input
    * @param {net.RequestInit=} opt_init
@@ -23,24 +25,9 @@ goog.scope(function () {
     });
 
     return new Promise(function (resolve, reject) {
-      if (!('responseType' in XMLHttpRequest.prototype)) {
-        var request = new XDomainRequest();
-
-        request.onload = function () {
-          resolve(new Response(/** @type {net.BodyInit} */ (request.responseText), {
-            status: request.status,
-            statusText: request.statusText
-          }));
-        };
-
-        request.onerror = function () {
-          reject(new TypeError('Network request failed'));
-        };
-
-        request.open(init.method, input.replace(/^http(s)?:/i, window.location.protocol));
-        request.send(/** @type {string} */ (init.body));
-      } else {
+      if (SUPPORTS_RESPONSE_TYPE) {
         var request = new XMLHttpRequest();
+
         request.onload = function () {
           resolve(new Response(/** @type {net.BodyInit} */ (request.response), {
             status: request.status,
@@ -65,6 +52,22 @@ goog.scope(function () {
         }
 
         request.send(init.body);
+      } else {
+        var request = new XDomainRequest();
+
+        request.onload = function () {
+          resolve(new Response(/** @type {net.BodyInit} */ (request.responseText), {
+            status: request.status,
+            statusText: request.statusText
+          }));
+        };
+
+        request.onerror = function () {
+          reject(new TypeError('Network request failed'));
+        };
+
+        request.open(init.method, input.replace(/^http(s)?:/i, window.location.protocol));
+        request.send(/** @type {string} */ (init.body));
       }
     });
   };
