@@ -38,7 +38,7 @@ goog.scope(function () {
         };
 
         request.open(init.method, input.replace(/^http(s)?:/i, window.location.protocol));
-        request.send(init.body);
+        request.send(/** @type {string} */ (init.body));
       } else {
         var request = new XMLHttpRequest();
         request.onload = function () {
