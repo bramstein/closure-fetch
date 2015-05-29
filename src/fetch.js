@@ -10,7 +10,7 @@ goog.scope(function () {
       Response = net.Response,
       Promise = lang.Promise;
 
-  var SUPPORTS_RESPONSE_TYPE = !!('responseType' in XMLHttpRequest.prototype);
+  var SUPPORTS_RESPONSE_TYPE = !(window['XDomainRequest'] && !('responseType' in XMLHttpRequest.prototype))
 
   /**
    * @param {string} input
