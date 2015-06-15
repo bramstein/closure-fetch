@@ -78,5 +78,9 @@ goog.scope(function () {
     });
   };
 
-  net.fetch = window['fetch'] || net.fetchImpl;
+  if (window['fetch']) {
+    net.fetch = window['fetch'].bind(window);
+  } else {
+    net.fetch = net.fetchImpl;
+  }
 });
