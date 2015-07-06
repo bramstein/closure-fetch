@@ -78,9 +78,15 @@ goog.scope(function () {
     });
   };
 
-  if (window['fetch']) {
-    net.fetch = window['fetch'].bind(window);
-  } else {
+  // FIXME: The native fetch is disabled until we figure out
+  // what to do with the Referer header. It is set to about:client
+  // when using fetch (on Firefox), and to a URL on Chrome. The spec
+  // seems to indicate Firefox is correct, but we need the referrer
+  // to be sent, so let's fallback on XMLHttpRequest for now (which
+  // sends the referrer in both browsers).
+  //if (window['fetch']) {
+  //  net.fetch = window['fetch'].bind(window);
+  //} else {
     net.fetch = net.fetchImpl;
-  }
+  //}
 });
