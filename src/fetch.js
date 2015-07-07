@@ -3,12 +3,9 @@ goog.provide('net.fetch');
 goog.require('net.Body');
 goog.require('net.Response');
 
-goog.require('lang.Promise');
-
 goog.scope(function () {
   var Body = net.Body,
-      Response = net.Response,
-      Promise = lang.Promise;
+      Response = net.Response;
 
   var SUPPORTS_RESPONSE_TYPE = !(window['XDomainRequest'] && !('responseType' in XMLHttpRequest.prototype))
 

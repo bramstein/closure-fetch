@@ -1,10 +1,6 @@
 goog.provide('net.Response');
 
-goog.require('lang.Promise');
-
 goog.scope(function () {
-  var Promise = lang.Promise;
-
   /**
    * @constructor
    * @implements {net.Body}

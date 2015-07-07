@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     },
     watch: {},
     exec: {
-      deps: 'calcdeps -p src -p ./node_modules/promis/src/ -p ./vendor/google/base.js -o deps > test/deps.js'
+      deps: 'calcdeps -p src -p ./vendor/google/base.js -o deps > test/deps.js'
     },
     jshint: {
       all: ['src/**/*.js'],
@@ -45,19 +45,19 @@ module.exports = function (grunt) {
     closurecompiler: {
       dist: {
         files: {
-          "fetch.js": ['src/**/*.js', 'node_modules/promis/src/**/*.js', 'polyfill.js']
+          "fetch.js": ['src/**/*.js', 'polyfill.js']
         },
         options: extend({}, compilerOptions)
       },
       compile: {
         files: {
-          "build/fetch.js": ['src/**/*.js', 'node_modules/promis/src/**/*.js', 'polyfill.js'],
+          "build/fetch.js": ['src/**/*.js', 'polyfill.js'],
         },
         options: extend({}, compilerOptions)
       },
       debug: {
         files: {
-          "build/fetch.debug.js": ['src/**/*.js', 'node_modules/promis/src/**/*.js', 'polyfill.js']
+          "build/fetch.debug.js": ['src/**/*.js', 'polyfill.js']
         },
         options: extend({}, compilerOptions, {
           debug: true,
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
     },
     concat: {
       dist: {
-        src: ['build/fetch.js'],
+        src: ['node_modules/promis/promise.js', 'build/fetch.js'],
         dest: 'fetch.js'
       }
     }
