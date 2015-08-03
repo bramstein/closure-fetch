@@ -17,7 +17,7 @@ goog.scope(function () {
     /**
      * @type {boolean}
      */
-    this['ok'] = (init.status >= 200 && init.status < 300);
+    this['ok'] = (init.status >= 200 && init.status < 300) || init.status === 0;
 
     /**
      * @type {string}
